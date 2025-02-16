@@ -6,17 +6,37 @@
 
 void lgin(); //로그인 동의 함수
 void login(); // 로그인 화면 함수
+void accetime(); // 본인 확인 및 시간
+void screen();	//초기 화면
+void productin(); //제품 입력
 
 struct Loginfo
 {
 	char id[20];
 	char passwd[20];
 };
+struct Product
+{
+	char prodname[20];	//이름
+	char makename[20];	//제조사
+	char exp[20];		//유통기한
+	char adult[20];		//성인여부
+	int price;			//가격
+	int stack;			//재고
+}
+// 전역 변수로 하여 다른 함수들에서도 쓸 수 있게 만듬
+struct Loginfo user1 = {'\0', '\0'};
+struct Loginfo user2 = {'\0', '\0'};
+struct Product prod1[20];
 
 int main()
 {
 	lgin();		//로그인 동의
 	login();	//로그인 화면
+	accetime(); //본인 확인 및 시간
+	time_t start = time(NULL);	//시작 시간
+	screen();		//초기 화면
+	
 
 	return 0;
 }
@@ -48,8 +68,6 @@ void lgin()		//시작 시 로그인 동의
 //로그인 화면 함수
 void login()
 {
-	struct Loginfo user1 = {'\0', '\0'};
-	struct Loginfo user2 = {'\0', '\0'};
 	strcpy(user1.passwd, "1234");
 	while(1)
 	{
@@ -66,7 +84,66 @@ void login()
 			printf("로그인 되었습니다.\n");
 			break;  //비밀 번호가 맞을 시 탈출
 		}
+	}
+}
+
+void accetime()
+{
+	system("clear");
+	int acc = 0;	//확인
+	printf("사원 %s 본인이 맞습니까? : ", user1.id);
+	scanf("%d", &acc);
+	while(1)
+	{
+		if (acc == 1)
+		{
+			printf("확인 되었습니다.\n");
+			sleep(1);
+			system("clear");
+			printf("현재 잔고 : 1,234,000 원 \n");
+			sleep(1);
+			system("clear");
+			break;
+		}
+		else(acc == 2);
+		{
+			printf("다시 로그인 합니다.\n");
+			login();
+			accetime();
+			break;
+		}
+	}
+}
+
+void screen();
+{
+	int num;	// 어디갈지 입력 받음
+	printf("1. 제품 입력\t2. 제품확인\n");
+	scanf("%d", &num);
+	if(num == 1)
+	{
+		printf("제품 입력으로 이동합니다.");
 		sleep(1);
 		system("clear");
+		productin();
 	}
+	else(num == 2)
+	{
+		printf("제품 확인으로 이동합니다.");
+	}
+}
+// 해결해야할 문제
+void productin();
+{
+	printf("1. 제품명 입력 : ");
+	scnaf("%s", prod[i].prodname);
+	printf("2. 제조회사 입력 : ");
+	scanf("%s", prod[i].makename);
+	printf("3. 유통기한 입력 :");
+	scanf("%s", prod[i].exp);
+	printf("4. 19금 물건 확인(1 : 예 , 0 : 아니오) : ");
+	scanf("%s", prod[i].adult);
+	printf("5. 가격");
+	scanf("%s", prod[i].price);
+	prod[i]
 }
