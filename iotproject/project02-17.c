@@ -37,16 +37,19 @@ struct Loginfo user2 = {'\0', '\0'};
 struct Product prod1[50];
 int prod_count = 0;	//현재 등록된 제품 수
 int account = 1234000;			//초기 잔고 1,234,000 원
+time_t start = 0;				//시작시간 전역변수 선언
+time_t end = 0;					//끝날 시간 전역변수 선언
+int paytime = 0;				//분 당 시간을 담을 변수
 
 int main()
 {
 	lgin();		//로그인 동의
 	login();	//로그인 화면
 	accetime(); //본인 확인 및 시간
-	time_t start = time(NULL);	//시작 시간
+	time(&start);	//시작 시간
 	screen();		//초기 화면
-	//time_t end = ;
-	//fin();			//종료 화면
+	time(&end);		//종료시간
+	fin();
 	
 
 	return 0;
@@ -164,10 +167,10 @@ void screen()
 	}
 	else if(num == 5)
 	{
-		printf("오늘의 일당 계산 후 종료 합니다.");
+		printf("오늘의 일당 계산 후 종료 합니다.\n");
 		sleep(1);
 		system("clear");
-		//fin();			//종료 메뉴로 이동
+		fin();			//종료 메뉴로 이동
 	}
 }
 
@@ -175,10 +178,16 @@ void screen()
 void productin()
 {
 	int i = 0;
-	if(prod_count >= 50)
+	while(1)
 	{
-		printf("더 이상 제품을 추가 할 수 없습니다. \n");
-		return;
+		if(prod_count >= 50)
+		{
+			printf("더 이상 제품을 추가 할 수 없습니다. \n");
+		}
+		else
+		{
+			break;
+		}
 	}
 
 	struct Product prod = {'\0','\0','\0',0,0,0};
@@ -201,12 +210,15 @@ void productin()
 		if(strcmp(prod1[i].prodname,prod.prodname) == 0)
 		{
 			prod1[i].count += prod.count;	//이미 존재하는 제품이면 수량 증가
+			printf("이미 제품이 있어 재고가 늘어났습니다.\n");
+			sleep(3);
+			system("clear");
+			screen();
 		}
 	}
-
-	//새 제품을 배열에 추가
-	prod1[prod_count] = prod;
-	++prod_count;
+		//새 제품은 배열에 추가
+		prod1[prod_count] = prod;
+		++prod_count;
 
 	printf("제품이 추가 되었습니다. \n");
 	sleep(3);
@@ -229,7 +241,7 @@ void checkprod()
 		}
 		printf("(%d개)\n", prod1[i].count); //*이 몇개인지 표시
 	}
-	sleep(3);
+	sleep(4);
 	system("clear");
 	screen();
 }
@@ -270,11 +282,18 @@ void payment()
 	// 성인인증
 	if(prod1[choice - 1].adult == 1)
 	{
-		printf("이 제품은 19세 이상만 구매 가능합니다.\n 태어난 연도를 입력 하시오. : ");
+		printf("이 제품은 19세 이상만 구매 가능합니다.\n태어난 연도를 입력 하시오. : ");
 		scanf("%d", &adultonly);
-		if (adultonly > 2006);
+		if (adultonly > 2006)
 		{
-			printf("구매가 취소 되었습니다.");
+			printf("구매가 불가능 합니다.\n");
+			sleep(1);
+			system("clear");
+			payment();
+		}
+		else;
+		{
+			printf("구매가 가능 합니다.\n");
 		}
 	}
 
@@ -293,7 +312,7 @@ void payment()
 		scanf("%s", card);	//카드 번호
 		account += totalprice;			//잔고 업데이트
 		prod1[choice-1].count -= mulryang;	// 재고 업데이트
-		printf("카드로 결제 했습니다.");
+		printf("카드로 결제 했습니다.\n");
 	}
 	else if(paychoice == 2)
 	{
@@ -302,18 +321,34 @@ void payment()
 		if(cash < totalprice)
 		{
 			printf("지불 금액이 부족합니다. \n");
-			return;
+			payment();
 		}
 		account += totalprice;			//잔고 업데이트
 		prod1[choice-1].count -= mulryang;		//재고 업데이트
 
 		change = cash-totalprice;
-		printf("거스름돈 : %d", change);
+		printf("거스름돈 : %d 원을 돌려 드립니다.\n", change);
+		sleep(1);
 		account -= change;				//거스름돈 만큼 잔고 업데이트
 		printf("현금으로 결제 했습니다. \n");
 	}
 	else
 	{
 		printf("잘못된 결제 방법입니다. \n");
+		payment();
 	}
+
+	sleep(2);
+	system("clear");
+	screen();
+}
+
+void fin()
+{
+	paytime = (int)difftime(end,start) / 60; //difftime은 time.h안에 있는 함수로 End-start를 해주는것int 형으로
+	printf("총 일한 시간 : %d 분\n", paytime);
+	printf("오늘의 일당 : %d 원\n", paytime*9200);
+	printf("잔고 : %d 원\n", account + (paytime*9200));
+	printf("10초후 종료 됩니다.\n");
+	sleep(10);
 }
