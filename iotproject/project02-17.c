@@ -4,18 +4,23 @@
 #include <time.h>
 #include <unistd.h>
 
-void lgin(); //로그인 동의 함수
-void login(); // 로그인 화면 함수
-void accetime(); // 본인 확인 및 시간
-void screen();	//초기 화면
-void productin(); //제품 입력
-void checkprod(); //제품 확인
+void lgin();		 //로그인 동의 함수
+void login();		 // 로그인 화면 함수
+void accetime();	 // 본인 확인 및 시간
+void screen();		 //초기 화면
+void productin();	 //제품 입력
+void checkprod();	 //제품 확인
+void payment();		 //결제로 이동
+void fin();			 //종료로 이동
 
+//로그인 구조체
 struct Loginfo
 {
 	char id[20];
 	char passwd[20];
 };
+
+//제품 구조체
 struct Product
 {
 	char prodname[20];	//이름
@@ -25,11 +30,13 @@ struct Product
 	int price;			//가격
 	int count;			//재고
 };
-// 전역 변수로 하여 다른 함수들에서도 쓸 수 있게 만듬
+
+// 전역 변수로 하여 다른 함수들에서도 쓸 수 있게 만듦
 struct Loginfo user1 = {'\0', '\0'};
 struct Loginfo user2 = {'\0', '\0'};
 struct Product prod1[50];
 int prod_count = 0;	//현재 등록된 제품 수
+int account = 1234000;			//초기 잔고 1,234,000 원
 
 int main()
 {
@@ -38,6 +45,8 @@ int main()
 	accetime(); //본인 확인 및 시간
 	time_t start = time(NULL);	//시작 시간
 	screen();		//초기 화면
+	//time_t end = ;
+	//fin();			//종료 화면
 	
 
 	return 0;
@@ -71,7 +80,7 @@ void lgin()		//시작 시 로그인 동의
 //로그인 화면 함수
 void login()
 {
-	strcpy(user1.passwd, "1234");
+	strcpy(user1.passwd, "1234");		//기본 비밀번호가 1234
 	while(1)
 	{
 		printf("ID : ");
@@ -104,7 +113,7 @@ void accetime()
 			printf("확인 되었습니다.\n");
 			sleep(1);
 			system("clear");
-			printf("현재 잔고 : 1,234,000 원 \n");
+			printf("현재 잔고 : %d 원 \n", account);
 			sleep(1);
 			system("clear");
 			break;
@@ -123,28 +132,42 @@ void accetime()
 void screen()
 {
 	int num;	// 어디갈지 입력 받음
-	printf("1. 제품 입력\t2. 제품확인\t3.제품 입고\t4.계산 \n");
+	printf("1. 제품 입력\t2. 제품 확인\t3.제품 입고\t4.계산\t 5.종료\n");
 	scanf("%d", &num);
 	if(num == 1)
 	{
 		printf("제품 입력으로 이동합니다. \n");
 		sleep(1);
 		system("clear");
-		productin();
+		productin();			//제품 입력으로 이동
 	}
 	else if(num == 2)
 	{
 		printf("제품 확인으로 이동합니다. \n");
 		sleep(1);
 		system("clear");
-		checkprod();
+		checkprod();			//제품 확인으로 이동
 	}
 	else if(num == 3)
 	{
 		printf("제품 입고로 이동합니다. \n");
 		sleep(1);
 		system("clear");
-		productin();
+		productin();			//제품 입고로 이동
+	}
+	else if(num == 4)
+	{
+		printf("계산으로 이동합니다.");
+		sleep(1);
+		system("clear");
+		payment();				//결제로 이동
+	}
+	else if(num == 5)
+	{
+		printf("오늘의 일당 계산 후 종료 합니다.");
+		sleep(1);
+		system("clear");
+		//fin();			//종료 메뉴로 이동
 	}
 }
 
@@ -177,8 +200,7 @@ void productin()
 	{
 		if(strcmp(prod1[i].prodname,prod.prodname) == 0)
 		{
-			++prod1[i].count;	//이미 존재하는 제품이면 수량 증가
-			return;
+			prod1[i].count += prod.count;	//이미 존재하는 제품이면 수량 증가
 		}
 	}
 
@@ -210,4 +232,88 @@ void checkprod()
 	sleep(3);
 	system("clear");
 	screen();
+}
+
+//결제 화면
+void payment()
+{
+	printf("구매할 제품 목록 \n");
+
+	int i = 0;
+	int choice = 0;
+	int mulryang = 0;
+	int adultonly = 0;		//태어난 연도
+	int totalprice = 0;		//총 금액
+
+	//제품 목록 출력				
+	for(i = 0; i < prod_count; ++i)
+	{
+		printf("%d.%s - 가격 : %d 원\n재고 : %d개\n성인용품 : %s\n", i+1, prod1[i].prodname, prod1[i].price, prod1[i].count, prod1[i].adult == 1 ? "예" : "아니오");
+	}
+	
+	printf("구매할 제품 번호를 선택하세요 : ");
+	scanf("%d", &choice);
+
+	if(choice < 1 || choice > prod_count)	//선택한 물품의 번호가 1보다 작거나 재고보다 많으면 잘못된 선택
+	{
+		printf("잘못된 선택입니다.\n");
+	}
+	printf("구매할 수량을 입력하세요 : ");
+	scanf("%d", &mulryang);
+	if(mulryang > prod1[choice - 1].count)	//입력한 수량이 재고보다 많으면 재고가 부족함.
+	{
+		printf("재고가 부족합니다. \n");
+	}
+	//총 금액
+	totalprice = prod1[choice-1].price * mulryang;
+	printf("총 계산 금액 : %d원 \n", totalprice);
+	// 성인인증
+	if(prod1[choice - 1].adult == 1)
+	{
+		printf("이 제품은 19세 이상만 구매 가능합니다.\n 태어난 연도를 입력 하시오. : ");
+		scanf("%d", &adultonly);
+		if (adultonly > 2006);
+		{
+			printf("구매가 취소 되었습니다.");
+		}
+	}
+
+	//구매 방법 선택
+	int paychoice = 0;
+	int card = 0;
+	int cash = 0;
+	int change = 0;	//거스름돈
+
+	printf("결제 방법을 선택하시오. (1:카드 2:현금) : ");
+	scanf("%d", &paychoice);
+	if(paychoice == 1)			//카드 결제
+	{
+		char card[20];
+		printf("카드 입력 : ");
+		scanf("%s", card);	//카드 번호
+		account += totalprice;			//잔고 업데이트
+		prod1[choice-1].count -= mulryang;	// 재고 업데이트
+		printf("카드로 결제 했습니다.");
+	}
+	else if(paychoice == 2)
+	{
+		printf("현금으로 %d원을 지불하세요. : ", totalprice);
+		scanf("%d", &cash);
+		if(cash < totalprice)
+		{
+			printf("지불 금액이 부족합니다. \n");
+			return;
+		}
+		account += totalprice;			//잔고 업데이트
+		prod1[choice-1].count -= mulryang;		//재고 업데이트
+
+		change = cash-totalprice;
+		printf("거스름돈 : %d", change);
+		account -= change;				//거스름돈 만큼 잔고 업데이트
+		printf("현금으로 결제 했습니다. \n");
+	}
+	else
+	{
+		printf("잘못된 결제 방법입니다. \n");
+	}
 }
