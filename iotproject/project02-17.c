@@ -170,7 +170,7 @@ void screen()
 		printf("오늘의 일당 계산 후 종료 합니다.\n");
 		sleep(1);
 		system("clear");
-		fin();			//종료 메뉴로 이동
+		return;			//종료 메뉴로 이동
 	}
 }
 
