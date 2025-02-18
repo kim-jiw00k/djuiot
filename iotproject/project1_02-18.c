@@ -5,8 +5,8 @@
 #include <time.h>
 
 void lgin();		 //로그인 동의 함수
-void login();		 // 로그인 화면 함수
-void accetime();	 // 본인 확인 및 시간
+void login();		 //로그인 화면 함수
+void accetime();	 //본인 확인 및 시간
 void screen();		 //초기 화면
 void productin();	 //제품 입력
 void checkprod();	 //제품 확인
@@ -44,10 +44,10 @@ int paytime = 0;				//분 당 시간을 담을 변수
 
 int main()
 {
-	lgin();		//로그인 동의
-	login();	//로그인 화면
-	accetime(); //본인 확인 및 시간
-	time(&start);	//시작 시간
+	lgin();			//로그인 동의
+	login();		//로그인 화면
+	accetime(); 		//본인 확인 및 시간
+	time(&start);		//시작 시간
 	screen();		//초기 화면
 	time(&end);		//종료시간
 	fin();
@@ -57,20 +57,20 @@ int main()
 }
 
 //로그인 동의
-void lgin()		//시작 시 로그인 동의
+void lgin()							//시작 시 로그인 동의
 {
-	int access = 0;
-	while(1)		//아니오를 고를경우 무한 되물음
+	int access = 0;	
+	while(1)						//아니오를 고를경우 무한 되물음
 	{
 		printf("로그인을 할 것인가요?\n예 : 1\t 아니오 : 2\n");
 		scanf("%d", &access);	
 		if(access == 1)
 		{
-			system("clear");	//화면 초기화
+			system("clear");			//화면 초기화
 			printf("로그인 화면으로 이동 합니다.\n");
-			sleep(3);			//3초후 초기화 에서 3초후
-			system("clear");	// 초기화
-			break;				//1 고를 경우 무한루프 탈출
+			sleep(3);				//3초후 초기화 에서 3초후
+			system("clear");			//초기화
+			break;					//1고를 경우 무한루프 탈출
 		}
 		else if(access == 2)
 		{
@@ -84,7 +84,7 @@ void lgin()		//시작 시 로그인 동의
 //로그인 화면 함수
 void login()
 {
-	strcpy(user1.passwd, "1234");		//기본 비밀번호가 1234
+	strcpy(user1.passwd, "1234");			//기본 비밀번호가 1234
 	while(1)
 	{
 		printf("ID : ");
@@ -98,7 +98,7 @@ void login()
 		else
 		{
 			printf("로그인 되었습니다.\n");
-			break;  //비밀 번호가 맞을 시 탈출
+			break; 				 //비밀 번호가 맞을 시 탈출
 		}
 	}
 }
@@ -135,50 +135,50 @@ void accetime()
 //제품 메뉴
 void screen()
 {
-	int num;	// 어디갈지 입력 받음
-	printf("1. 제품 입력   2. 제품 확인   3. 제품 입고   4. 계산   5. 제품 찾기   6. 종료\n");//\t를 쓰니까 4~5번 간격이 이상해져서 억지로 늘림
+	int num;										// 어디갈지 입력 받음
+	printf("1. 제품 입력   2. 제품 확인   3. 제품 입고   4. 계산   5. 제품 찾기   6. 종료\n");	//\t를 쓰니까 4~5번 간격이 이상해져서 억지로 늘림
 	scanf("%d", &num);
 	if(num == 1)
 	{
 		printf("제품 입력으로 이동합니다. \n");
 		sleep(1);
 		system("clear");
-		productin();			//제품 입력으로 이동
+		productin();									//제품 입력으로 이동
 	}
 	else if(num == 2)
 	{
 		printf("제품 확인으로 이동합니다. \n");
 		sleep(1);
 		system("clear");
-		checkprod();			//제품 확인으로 이동
+		checkprod();									//제품 확인으로 이동
 	}
 	else if(num == 3)
 	{
 		printf("제품 입고로 이동합니다. \n");
 		sleep(1);
 		system("clear");
-		productin();			//제품 입고로 이동
+		productin();									//제품 입고로 이동
 	}
 	else if(num == 4)
 	{
 		printf("계산으로 이동합니다.");
 		sleep(1);
 		system("clear");
-		payment();				//결제로 이동
+		payment();									//결제로 이동
 	}
 	else if(num == 5)
 	{
 		printf("제품 찾기로 이동합니다.\n");
 		sleep(1);
 		system("clear");
-		findprod();			//제품 찾기로 이동
+		findprod();									//제품 찾기로 이동
 	}
 	else if(num == 6)
 	{
 		printf("오늘의 일당 계산 후 종료 합니다.\n");
 		sleep(1);
 		system("clear");
-		return;			//함수 종료
+		return;										//함수 종료
 	}
 }
 
@@ -188,7 +188,7 @@ void productin()
 	int i = 0;
 	while(1)
 	{
-		if(prod_count >= 50)
+		if(prod_count >= 50)				//제품의 수 최대치
 		{
 			printf("더 이상 제품을 추가 할 수 없습니다. \n");
 		}
@@ -198,7 +198,7 @@ void productin()
 		}
 	}
 
-	struct Product prod = {'\0','\0','\0',0,0,0};
+	struct Product prod = {'\0','\0','\0',0,0,0};		//함수 내에서 쓸 구조체 변수
 
 	printf("1. 제품명 입력 : ");
 	scanf("%s", prod.prodname);
@@ -217,7 +217,7 @@ void productin()
 	{
 		if(!strcmp(prod1[i].prodname,prod.prodname))
 		{
-			prod1[i].count += prod.count;	//이미 존재하는 제품이면 수량 증가
+			prod1[i].count += prod.count;				//이미 존재하는 제품이면 수량 증가
 			printf("이미 제품이 있어 재고가 늘어났습니다.\n");
 			sleep(3);
 			system("clear");
@@ -225,7 +225,7 @@ void productin()
 		}
 	}
 		//새 제품은 배열에 추가
-		prod1[prod_count] = prod;
+		prod1[prod_count] = prod;				//전역변수인 prod1에 지역변수인 prod를 넣는건데 위치는 prod1[0]이다 재고가 늘수록 다음 배열에 들어감
 		++prod_count;
 
 	printf("제품이 추가 되었습니다. \n");
@@ -245,9 +245,9 @@ void checkprod()
 		printf("제품명 : %s \t 수량 : ", prod1[i].prodname);
 		for(j = 0; j < prod1[i].count; ++j)
 		{	
-			printf("*");		//수량 만큼 * 표시
+			printf("*");				//수량 만큼 * 표시
 		}
-		printf("(%d개)\n", prod1[i].count); //*이 몇개인지 표시
+		printf("(%d개)\n", prod1[i].count); 		//*이 몇개인지 표시
 	}
 	sleep(4);
 	system("clear");
@@ -262,8 +262,8 @@ void payment()
 	int i = 0;
 	int choice = 0;
 	int mulryang = 0;
-	int adultonly = 0;		//태어난 연도
-	int totalprice = 0;		//총 금액
+	int adultonly = 0;				//태어난 연도
+	int totalprice = 0;				//총 금액
 
 	//제품 목록 출력				
 	for(i = 0; i < prod_count; ++i)
@@ -274,13 +274,13 @@ void payment()
 	printf("구매할 제품 번호를 선택하세요 : ");
 	scanf("%d", &choice);
 
-	if(choice < 1 || choice > prod_count)	//선택한 물품의 번호가 1보다 작거나 재고보다 많으면 잘못된 선택
+	if(choice < 1 || choice > prod_count)		//선택한 물품의 번호가 1보다 작거나 재고보다 많으면 잘못된 선택
 	{
 		printf("잘못된 선택입니다.\n");
 	}
 	printf("구매할 수량을 입력하세요 : ");
 	scanf("%d", &mulryang);
-	if(mulryang > prod1[choice - 1].count)	//입력한 수량이 재고보다 많으면 재고가 부족함.
+	if(mulryang > prod1[choice - 1].count)		//입력한 수량이 재고보다 많으면 재고가 부족함.
 	{
 		printf("재고가 부족합니다. \n");
 	}
@@ -292,7 +292,7 @@ void payment()
 	{
 		printf("이 제품은 19세 이상만 구매 가능합니다.\n태어난 연도를 입력 하시오. : ");
 		scanf("%d", &adultonly);
-		if (adultonly > 2006)
+		if (adultonly > 2006)						//2006년생 이후로는 구매 불가능
 		{
 			printf("구매가 불가능 합니다.\n");
 			sleep(1);
@@ -313,13 +313,13 @@ void payment()
 
 	printf("결제 방법을 선택하시오. (1:카드 2:현금) : ");
 	scanf("%d", &paychoice);
-	if(paychoice == 1)			//카드 결제
+	if(paychoice == 1)					//카드 결제
 	{
 		char card[20];
 		printf("카드 입력 : ");
 		scanf("%s", card);	//카드 번호
-		account += totalprice;			//잔고 업데이트
-		prod1[choice-1].count -= mulryang;	// 재고 업데이트
+		account += totalprice;				//잔고 업데이트
+		prod1[choice-1].count -= mulryang;		// 재고 업데이트
 		printf("카드로 결제 했습니다.\n");
 	}
 	else if(paychoice == 2)
@@ -331,7 +331,7 @@ void payment()
 			printf("지불 금액이 부족합니다. \n");
 			payment();
 		}
-		account += totalprice;			//잔고 업데이트
+		account += totalprice;				//잔고 업데이트
 		prod1[choice-1].count -= mulryang;		//재고 업데이트
 
 		change = cash-totalprice;
@@ -353,7 +353,7 @@ void payment()
 
 void fin()
 {
-	paytime = (int)difftime(end,start) / 60; //difftime은 time.h안에 있는 함수로 End-start를 해주는것int 형으로
+	paytime = (int)difftime(end,start) / 60; 	//difftime은 time.h안에 있는 함수로 End-start를 해주는것int 형으로
 	printf("총 일한 시간 : %d 분\n", paytime);
 	printf("오늘의 일당 : %d 원\n", paytime*9200);
 	printf("잔고 : %d 원\n", account + (paytime*9200));
@@ -364,7 +364,7 @@ void fin()
 void findprod()
 {
 	int i = 0;
-	int found = 0;	//제품 발견 여부
+	int found = 0;					//제품 발견 여부
 	char find[20];
 	printf("찾고자 하는 제품명 : ");
 	scanf("%s", find);
