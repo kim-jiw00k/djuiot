@@ -12,7 +12,7 @@ void productin();	 //제품 입력
 void checkprod();	 //제품 확인
 void payment();		 //결제로 이동
 void findprod();	 //제품 찾기로 이동
-void fin();			 //종료로 이동
+void fin();		 //종료로 이동
 
 //로그인 구조체
 struct Loginfo
@@ -24,9 +24,9 @@ struct Loginfo
 //제품 구조체
 struct Product
 {
-	char prodname[20];	//이름
-	char makename[20];	//제조사
-	char exp[20];		//유통기한
+	char prodname[20];		//이름
+	char makename[20];		//제조사
+	char exp[20];			//유통기한
 	int adult;			//성인여부
 	int price;			//가격
 	int count;			//재고
@@ -36,8 +36,8 @@ struct Product
 struct Loginfo user1 = {'\0', '\0'};
 struct Loginfo user2 = {'\0', '\0'};
 struct Product prod1[50];
-int prod_count = 0;	//현재 등록된 제품 수
-int account = 1234000;			//초기 잔고 1,234,000 원
+int prod_count = 0;				//현재 등록된 제품 수
+int account = 1234000;				//초기 잔고 1,234,000 원
 time_t start = 0;				//시작시간 전역변수 선언
 time_t end = 0;					//끝날 시간 전역변수 선언
 int paytime = 0;				//분 당 시간을 담을 변수
@@ -215,7 +215,7 @@ void productin()
 	//제품이 존재하는지 확인
 	for(i = 0; i < prod_count; ++i)
 	{
-		if(strcmp(prod1[i].prodname,prod.prodname) == 0)
+		if(!strcmp(prod1[i].prodname,prod.prodname))
 		{
 			prod1[i].count += prod.count;	//이미 존재하는 제품이면 수량 증가
 			printf("이미 제품이 있어 재고가 늘어났습니다.\n");
