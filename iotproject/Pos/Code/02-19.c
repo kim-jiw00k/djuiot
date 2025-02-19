@@ -39,7 +39,7 @@ struct Product prod1[50];               //들어 갈 수 있는 제품 수
 int prod_count = 0;				//제품을 등록할 곳
 int account = 1234000;				//초기 잔고 1,234,000 원
 time_t start = 0;				//시작시간 전역변수 선언
-time_t end = 0;					//끝날 시간 전역변수 선언
+time_t end = 0;					//끝날시간 전역변수 선언
 int paytime = 0;				//분 당 시간을 담을 변수
 
 int main()
