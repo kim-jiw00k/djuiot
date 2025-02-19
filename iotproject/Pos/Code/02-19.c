@@ -278,20 +278,14 @@ void payment()
 	{
 		printf("잘못된 선택입니다.\n");
 	}
-	printf("구매할 수량을 입력하세요 : ");
-	scanf("%d", &mulryang);
-	if(mulryang > prod1[choice - 1].count)		//입력한 수량이 재고보다 많으면 재고가 부족함.
-	{
-		printf("재고가 부족합니다. \n");
-	}
-	//총 금액
-	totalprice = prod1[choice-1].price * mulryang;
-	printf("총 계산 금액 : %d원 \n", totalprice);
+	
 	// 성인인증
 	if(prod1[choice - 1].adult == 1)
 	{
-		printf("이 제품은 19세 이상만 구매 가능합니다.\n태어난 연도를 입력 하시오. : ");    //주민등록번호 구현이 어려워 태어난 연도로 구별
+		printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+		printf("경고 : 이 제품은 19세 이상만 구매 가능합니다.\n태어난 연도를 입력 하시오. : ");    //주민등록번호 구현이 어려워 태어난 연도로 구별
 		scanf("%d", &adultonly);
+		printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 		if (adultonly > 2006)						//2006년생 이후로는 구매 불가능
 		{
 			printf("구매가 불가능 합니다.\n");
@@ -304,6 +298,15 @@ void payment()
 			printf("구매가 가능 합니다.\n");
 		}
 	}
+	printf("구매할 수량을 입력하세요 : ");
+	scanf("%d", &mulryang);
+	if(mulryang > prod1[choice - 1].count)		//입력한 수량이 재고보다 많으면 재고가 부족함.
+	{
+		printf("재고가 부족합니다. \n");
+	}
+	//총 금액
+	totalprice = prod1[choice-1].price * mulryang;
+	printf("총 계산 금액 : %d원 \n", totalprice);
 
 	//구매 방법 선택
 	int paychoice = 0;  //구매방법
