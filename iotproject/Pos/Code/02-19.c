@@ -284,8 +284,8 @@ void payment()
 	{
 		printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 		printf("경고 : 이 제품은 19세 이상만 구매 가능합니다.\n태어난 연도를 입력 하시오. : ");    //주민등록번호 구현이 어려워 태어난 연도로 구별
-		scanf("%d", &adultonly);
 		printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+		scanf("%d", &adultonly);
 		if (adultonly > 2006)						//2006년생 이후로는 구매 불가능
 		{
 			printf("구매가 불가능 합니다.\n");
@@ -303,6 +303,7 @@ void payment()
 	if(mulryang > prod1[choice - 1].count)		//입력한 수량이 재고보다 많으면 재고가 부족함.
 	{
 		printf("재고가 부족합니다. \n");
+		payment();
 	}
 	//총 금액
 	totalprice = prod1[choice-1].price * mulryang;
