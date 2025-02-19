@@ -84,21 +84,21 @@ void lgin()							//시작 시 로그인 동의
 //로그인 화면 함수
 void login()
 {
-	strcpy(user1.passwd, "1234");			//기본 비밀번호 1234를 user1.passwd에 삽입
+	strcpy(user1.passwd, "1234");				//기본 비밀번호 1234를 user1.passwd에 삽입
 	while(1)
 	{
 		printf("ID : ");
 		scanf("%s",user1.id);	
 		printf("PASSWD (기본 1234) : ");
-		scanf("%s",user2.passwd);      //user2로 비밀번호를 입력 받고
-		if(strcmp(user1.passwd, user2.passwd))  //user1.passwd와 user2.passwd가 맞는지 확인
+		scanf("%s",user2.passwd);      			//user2로 비밀번호를 입력 받고
+		if(strcmp(user1.passwd, user2.passwd))  	//user1.passwd와 user2.passwd가 맞는지 확인
 		{
-			printf("비밀번호가 다릅니다.\n");      //반환값 0이 아닌 다른 값
+			printf("비밀번호가 다릅니다.\n");     	 //반환값 0이 아닌 다른 값
 		}
 		else
 		{
 			printf("로그인 되었습니다.\n");
-			break; 				 //비밀 번호가 맞을 시 탈출 반환값 0
+			break; 					 //비밀 번호가 맞을 시 탈출 반환값 0
 		}
 	}
 }
@@ -107,8 +107,8 @@ void login()
 void accetime()
 {
 	system("clear");
-	int acc = 0;	//확인 받을 변수
-	printf("사원 %s 본인이 맞습니까? : ", user1.id);  //id 가 사원 명과 같음
+	int acc = 0;		//확인 받을 변수
+	printf("사원 %s 본인이 맞습니까? : ", user1.id); 	 //id 가 사원 명과 같음
 	scanf("%d", &acc);
 	while(1)
 	{
@@ -353,10 +353,10 @@ void payment()
 
 void fin()
 {
-	paytime = (int)difftime(end,start) / 60; 	//difftime은 time.h안에 있는 함수로 End-start를 해주는것 int 형으로 받기
-	printf("총 일한 시간 : %d 분\n", paytime); //전역 변수 paytime
-	printf("오늘의 일당 : %d 원\n", paytime*9200); //일한 분 만큼 최저 분당 급여인 9200원을 곱함
-	printf("잔고 : %d 원\n", account + (paytime*9200));  //일당 만큼 잔고에 돈이 들어감
+	paytime = (int)difftime(end,start) / 60; 		//difftime은 time.h안에 있는 함수로 End-start를 해주는것 int 형으로 받기
+	printf("총 일한 시간 : %d 분\n", paytime); 		//전역 변수 paytime
+	printf("오늘의 일당 : %d 원\n", paytime*9200);		 //일한 분 만큼 최저 분당 급여인 9200원을 곱함
+	printf("잔고 : %d 원\n", account + (paytime*9200));  	//일당 만큼 잔고에 돈이 들어감
 	printf("10초후 종료 됩니다.\n");
 	sleep(10);
 }
@@ -368,7 +368,7 @@ void findprod()
 	char find[20];
 	printf("찾고자 하는 제품명 : ");
 	scanf("%s", find);
-	for(i = 0; i < prod_count; ++i)    //pord_count 는 등록된 제품 수량
+	for(i = 0; i < prod_count; ++i)    		//pord_count 는 등록된 제품 수량
 	{
 		if (!strcmp(find,prod1[i].prodname))
 		{
