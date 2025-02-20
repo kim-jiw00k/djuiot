@@ -258,13 +258,15 @@ void productipgo()
 			printf("이미 제품이 있어 재고가 늘어났습니다.\n");
 			sleep(3);
 			system("clear");
-			screen();
+			return;
 		}
 	}
 	//새 제품은 배열에 추가
 	prod1[prod_count] = prod;				//전역변수인 prod1에 지역변수인 prod를 넣는건데 위치는 prod1[0]이다 재고가 늘수록 다음 배열에 들어감
 	++prod_count;
-  printf("새로운 제품이 입고 되었습니다.");
+ 	printf("새로운 제품이 입고 되었습니다.");
+	sleep(3);
+	system("clear");
 }
 
 //제품 확인 메뉴
@@ -368,7 +370,7 @@ void payment()
 			printf("지불 금액이 부족합니다. \n");
 			payment();
 		}
-		account += totalprice;				//받은 돈 만큼 잔고 업데이트
+		account += cash;				//받은 돈 만큼 잔고 업데이트
 		prod1[choice-1].count -= mulryang;		//팔린 재고 만큼 업데이트
 
 		change = cash-totalprice;
