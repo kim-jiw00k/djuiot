@@ -161,7 +161,7 @@ void screen()
 	}
 	else if(num == 4)
 	{
-		printf("계산으로 이동합니다.");
+		printf("계산으로 이동합니다. \n");
 		sleep(1);
 		system("clear");
 		payment();									//결제로 이동
