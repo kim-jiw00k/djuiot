@@ -355,16 +355,7 @@ void payment()
 	screen();
 }
 
-void fin()
-{
-	paytime = (int)difftime(end,start) / 60; 		//difftime은 time.h안에 있는 함수로 End-start를 해주는것 int 형으로 받기
-	printf("총 일한 시간 : %d 분\n", paytime); 		//전역 변수 paytime
-	printf("오늘의 일당 : %d 원\n", paytime*9200);		 //일한 분 만큼 최저 분당 급여인 9200원을 곱함
-	printf("잔고 : %d 원\n", account + (paytime*9200));  	//일당 만큼 잔고에 돈이 들어감
-	printf("10초후 종료 됩니다.\n");
-	sleep(10);
-}
-
+//제품 찾기
 void findprod()
 {
 	int i = 0;
@@ -388,4 +379,15 @@ void findprod()
 	sleep(3);
 	system("clear");
 	screen();
+}
+
+//종료
+void fin()
+{
+	paytime = (int)difftime(end,start) / 60; 		//difftime은 time.h안에 있는 함수로 End-start를 해주는것 int 형으로 받기
+	printf("총 일한 시간 : %d 분\n", paytime); 		//전역 변수 paytime
+	printf("오늘의 일당 : %d 원\n", paytime*9200);		 //일한 분 만큼 최저 분당 급여인 9200원을 곱함
+	printf("잔고 : %d 원\n", account + (paytime*9200));  	//일당 만큼 잔고에 돈이 들어감
+	printf("10초후 종료 됩니다.\n");
+	sleep(10);
 }
