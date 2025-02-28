@@ -9,7 +9,7 @@ typedef struct Car
 	struct Car* link;
 }car;
 
-void index_screen();	//초기 화면
+void screen();	//초기 화면
 void add_screen();		//추가 화면
 void print_screen();	//조회 화면
 void find_screen();		//찾기 화면
@@ -19,11 +19,11 @@ car * head = NULL;
 
 int main()
 {
-	index_screen();
+	screen();
 
 	return 0;
 }
-void index_screen()
+void screen()
 {
 	int choice = 0;
 	printf("\t\t***** 주차 관리 시스템 *****\n");
@@ -35,7 +35,6 @@ void index_screen()
 		printf("차량 추가로 이동합니다.\n");
 		sleep(1);
 		system("clear");
-		break;
 		add_screen();
 	}
 	else if(choice == 2)
@@ -43,7 +42,6 @@ void index_screen()
 		printf("차량 조회로 이동합니다.\n");
 		sleep(1);
 		system("clear");
-		break;
 		print_screen();
 	}
 	else if(choice == 3)
@@ -51,13 +49,12 @@ void index_screen()
 		printf("차량 검색으로 이동합니다.\n");
 		sleep(1);
 		system("clear");
-		break;
 		find_screen();
 	}
 	else
 	{
 		printf("잘못 된 선택입니다.\n");
-		index_screen();
+		screen();
 	}
 }
 int add(car ** carnum, char * str)
