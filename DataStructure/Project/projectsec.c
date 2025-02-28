@@ -15,6 +15,7 @@ void print_screen();	//조회 화면
 void find_screen();		//찾기 화면
 int add(car ** carnum, char * str);	//추가 하는 함수
 
+car * head = NULL;
 
 int main()
 {
@@ -29,37 +30,68 @@ void index_screen()
 	printf("번호를 입력하시면 이동합니다.\n1. 차량 추가  2. 차량 조회  3. 차량 검색\n");
 	printf("번호 입력 : ");
 	scanf("%d", &choice);
-	while(1)
+	if(choice == 1)
 	{
-		if(choice == 1)
-		{
-			printf("차량 추가로 이동합니다.\n");
-			sleep(1);
-			system("clear");
-			break;
-			add_screen();
-		}
-		else if(choice == 2)
-		{
-			printf("차량 조회로 이동합니다.\n");
-			sleep(1);
-			system("clear");
-			break;
-			print_screen();
-		}
-		else if(choice == 3)
-		{
-			printf("차량 검색으로 이동합니다.\n");
-			sleep(1);
-			system("clear");
-			break;
-			find_screen();
-		}
-		else
-		{
-			printf("잘못 된 선택입니다.\n");
-			index_screen();
-		}
+		printf("차량 추가로 이동합니다.\n");
+		sleep(1);
+		system("clear");
+		break;
+		add_screen();
 	}
+	else if(choice == 2)
+	{
+		printf("차량 조회로 이동합니다.\n");
+		sleep(1);
+		system("clear");
+		break;
+		print_screen();
+	}
+	else if(choice == 3)
+	{
+		printf("차량 검색으로 이동합니다.\n");
+		sleep(1);
+		system("clear");
+		break;
+		find_screen();
+	}
+	else
+	{
+		printf("잘못 된 선택입니다.\n");
+		index_screen();
+	}
+}
+int add(car ** carnum, char * str)
+{
+	car * node = (car*)malloc(sizeof(car));
+	strcpy(node -> num,str);
+	if(*carnum == NULL)
+	{
+		*carnum = node;
+		node -> link = NULL;
+	}
+	else
+	{
+		car * current = *carnum;
+		while(current -> link != NULL)
+		{
+			current = current -> link;
+		}
+		current -> link = node;
+		node -> link = NULL;
+	}
+	return 0;
+}
 
+void add_screen()		//추가 화면 함수
+{
+	char carn[100];
+	car * head = NULL;
+	printf("***** 차량 번호 추가 *****\n");
+	printf("추가할 차량 번호를 입력하시오. : ");
+	scanf("%s", &carn);
+	add(&head, carn);		//head에다가 carn을 추가 한다.
+	printf("추가 완료! \n");
+	sleep(1);
+	system("clear");
+	screen();
 }
