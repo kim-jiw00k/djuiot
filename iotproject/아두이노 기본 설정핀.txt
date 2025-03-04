@@ -1,0 +1,18 @@
+*아두이노 기본 설정 핀
+
+1. pinMode(pin, mode) : 특정 핀을 입력 또는 출력으로 설정
+    -pin : mode를 설정하고자 하는 핀의 번호
+    -mode : INPUT, OUTPUT, INPUT_PULLUP
+
+2. digitalWrite(pin, value) : 데이터를 출력하기 위한 함수
+   -value : HIGH(= 5V, VDD, 1), LOW(= 0V, GND, 0)
+
+3. digitalRead(pin) : 데이터를 읽어 오는 함수
+   -읽어 오는 값이 5V 또는 0V
+
+
+
+
+PULLUP		-  스위치를 안눌렀을때 들어오는 값이 1
+PULLDOWN	-  스위치를 안눌렀을때 들어오는 값이 0
+
