@@ -1,0 +1,5 @@
+pi = (3 + 0.14j)
+print(pi.real)
+print(pi.imag)
+print(pi)
+print(type(pi))
