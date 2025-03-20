@@ -1,0 +1,16 @@
+import matplotlib.pyplot as plt
+import numpy as np
+fig = plt.figure()
+plt.title("Sine Cosine waves")
+x = np.linspace(0, np.pi * 2,100)
+#y1 = np.sin(x)
+#y2 = np.cos(x)
+#plt.plot(x, np.sin(x), 'r--')
+#plt.plot(x, np.cos(x), 'b:')
+plt.plot(x, np.sin(x), 'r--', label="Sine")
+plt.plot(x, np.cos(x), 'b:', label="Cosine")
+plt.xlabel("x label")
+plt.ylabel("Magnitube")
+plt.legend()
+fig.savefig("sine_cosine_waves.png")
+plt.show()
