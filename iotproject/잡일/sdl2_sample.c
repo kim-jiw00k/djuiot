@@ -40,12 +40,16 @@ int main(int argc, char* argv[]) {
         }
 
         // 화면 지우기
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // 검은색
+        SDL_SetRenderDrawColor(renderer, 255, 204, 51, 255); // 나무색
         SDL_RenderClear(renderer);
 
         // 렌더링하기
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // 빨간색
-        SDL_RenderDrawLine(renderer, 100, 100, 200, 200); // 선 그리기
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // 검은색
+        for (int i = 1; i < 10; i++) {
+            SDL_RenderDrawLine(renderer, 1 + i * 10, 0, 1 + i * 10, 480); // 각 선의 시작점과 끝점을 변경
+            SDL_RenderDrawLine(renderer, 0 , 1 + i * 10, 640 , 1 + i * 10); // 각 선의 시작점과 끝점을 변경
+
+        }
 
         // 화면 업데이트
         SDL_RenderPresent(renderer);
