@@ -1,59 +1,47 @@
-SDL_Texture *loadTexture(const char *file){
- SDL_Surface *surface;
- SDL_Texture *texture;
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
- surface = SDL_LoadIMG(file);
- if(surface == NULL){
-  printf("%s파일을 읽을 수 없습니다.\n", file);
-  return NULL;
- }
+int main(int argc, char* argv[]) {
+    SDL_Init(SDL_INIT_VIDEO);
 
- texture = SDL_CreateTextureFromSurface(renderer, surface);
- if(texture == NULL){
-  printf("텍스쳐를 생성할 수 없습니다.\n");
- }
+    SDL_Window* window = SDL_CreateWindow("SDL Image Demo", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
- SDL_FreeSurface(surface);
+    IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
 
- return texture;
+    SDL_Surface* imageSurface = IMG_Load("image.jpg");
+    SDL_Surface* imageSurface = IMG_Load("image1.jpg");
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, imageSurface);
+
+    SDL_Rect destRect = {120, 70, 400, 70};
+    SDL_Rect destRect = {250, 210, 400, 70};
+
+    bool quit = false;
+    SDL_Event event;
+
+    while (!quit) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                quit = true;
+            }
+            if (event.type == SDL_KEYDOWN) {
+                if (event.key.keysym.sym == SDLK_ESCAPE) {
+                    quit = true;
+                }
+            }
+        }
+
+        SDL_RenderCopy(renderer, texture, NULL, &destRect);
+        SDL_RenderPresent(renderer);
+    }
+
+    SDL_DestroyTexture(texture);
+    SDL_FreeSurface(imageSurface);
+
+    IMG_Quit();
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return 0;
 }
-void drawTexture(SDL_Renderer *renderer,int x,int y,SDL_Texture *texture){
- SDL_Rect src,dst;
-
- src.x = 400; 
- src.y = 70;
- SDL_QueryTexture(texture, NULL, NULL, &src.w, &src.h);
-
- dst.x = x;
- dst.y = y;
- dst.w = src.w;
- dst.h = src.h;
-
- SDL_RenderCopy(renderer, texture, &src, &dst);
-}
-
-
-
-bool quit = false;
-SDL_Event event;
-
-SDL_Texture *texture;
-
-texture = loadTexture("image.jpg");
-texture1 = loadTexture("image1.jpg");
-
-while(!quit){
-  while(SDL_PollEvent(&event)){
-   switch(event.type){
-   case SDL_QUIT:
-    quit = true;
-    break;
-   }
-  }
-  {
-   drawTexture(renderer, 120,70, texture);
-   drawTexture(renderer, 250,70, texture1);
-   SDL_RenderPresent(renderer);
-  }
-  SDL_Delay(1);
- }
