@@ -9,12 +9,15 @@ int main(int argc, char* argv[]) {
 
     IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
 
-    SDL_Surface* imageSurface = IMG_Load("image.jpg");
-    SDL_Surface* imageSurface = IMG_Load("image1.jpg");
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, imageSurface);
+    // 첫 번째 이미지 로드
+    SDL_Surface* imageSurface1 = IMG_Load("image.jpg");
+    SDL_Texture* texture1 = SDL_CreateTextureFromSurface(renderer, imageSurface1);
+    SDL_Rect destRect1 = {120, 70, 400, 70};
 
-    SDL_Rect destRect = {120, 70, 400, 70};
-    SDL_Rect destRect = {250, 210, 400, 70};
+    // 두 번째 이미지 로드
+    SDL_Surface* imageSurface2 = IMG_Load("image1.jpg");
+    SDL_Texture* texture2 = SDL_CreateTextureFromSurface(renderer, imageSurface2);
+    SDL_Rect destRect2 = {250, 210, 400, 70};
 
     bool quit = false;
     SDL_Event event;
@@ -31,12 +34,17 @@ int main(int argc, char* argv[]) {
             }
         }
 
-        SDL_RenderCopy(renderer, texture, NULL, &destRect);
+        SDL_RenderClear(renderer); // 화면 지우기
+        SDL_RenderCopy(renderer, texture1, NULL, &destRect1); // 첫 번째 이미지 그리기
+        SDL_RenderCopy(renderer, texture2, NULL, &destRect2); // 두 번째 이미지 그리기
         SDL_RenderPresent(renderer);
     }
 
-    SDL_DestroyTexture(texture);
-    SDL_FreeSurface(imageSurface);
+    // 메모리 해제
+    SDL_DestroyTexture(texture1);
+    SDL_FreeSurface(imageSurface1);
+    SDL_DestroyTexture(texture2);
+    SDL_FreeSurface(imageSurface2);
 
     IMG_Quit();
     SDL_DestroyRenderer(renderer);
