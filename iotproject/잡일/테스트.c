@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
     // 두 번째 이미지 로드
     SDL_Surface* imageSurface2 = IMG_Load("image1.jpg");
     SDL_Texture* texture2 = SDL_CreateTextureFromSurface(renderer, imageSurface2);
-    SDL_Rect destRect2 = {250, 210, 400, 70};
+    SDL_Rect destRect2 = {120, 210, 400, 70};
 
     bool quit = false;
     SDL_Event event;
