@@ -12,3 +12,7 @@ mini_project_1 : 데이터 증강식 과 KNN 알고리즘을 이용한 닥스훈
 mini_project_2 : TensorFlow 와 keras 를 이용하여 사이킷런 dataset 안에 있는 breast_cancer 데이터를 이용한 유방암 예측 프로그램
 
 mini_project_3 : CNN을 이용한 필기체 숫자 인식 프로그램
+
+mini_project_4 : VGG19를 이용하여 이미지 인식 프로그램 
+
+project_4 : 파이썬을 이용하여 필기체 인식 후 아두이노 출력 프로그램
