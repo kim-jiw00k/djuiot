@@ -2,29 +2,27 @@ import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 
 # 닥스훈트의 길이와 높이 특성 데이터
-dachhund_length = [77, 78, 85, 83, 73, 77, 73, 80]
-dachhund_height = [25, 28, 29, 30, 21, 22, 17, 35]
+dachhund_length = [77, 78, 85, 83, 73, 77, 73, 80]  # 준비된 데이터
+dachhund_height = [25, 28, 29, 30, 21, 22, 17, 35]  # 준비된 데이터
 # 사모예드의 길이와 높이 특성 데이터
-samoyed_length = [75, 77, 86, 86, 79, 83, 83, 88]
-samoyed_height = [56, 57, 50, 53, 60, 53, 49, 61]
+samoyed_length = [75, 77, 86, 86, 79, 83, 83, 88]  # 준비된 데이터
+samoyed_height = [56, 57, 50, 53, 60, 53, 49, 61]  # 준비된 데이터
+dachhund_length_mean = np.mean(dachhund_length)  # 더욱 많은 데이터 값을 위해 평균을 구함
+dachhund_height_mean = np.mean(dachhund_height) 
 
-dachhund_length_mean = np.mean(dachhund_length)
-dachhund_height_mean = np.mean(dachhund_height)
-
-samoyed_length_mean = np.mean(samoyed_length)
+samoyed_length_mean = np.mean(samoyed_length)  # 더욱 많은 데이터 값을 위해 평균을 구함
 samoyed_height_mean = np.mean(samoyed_height)
 
-new_dachhund_length = np.random.normal(dachhund_length_mean,10.0,200)
-new_dachhund_height = np.random.normal(dachhund_height_mean,10.0,200)
+new_dachhund_length = np.random.normal(dachhund_length_mean,10.0,200)  # 새로운 200마리의 닥스훈트 길이 값 구함 랜덤하게 구하지만 평균 값을 통해 +-10 정도
+new_dachhund_height = np.random.normal(dachhund_height_mean,10.0,200)  # 새로운 200마리의 닥스훈트 높이 값 구함 랜덤하게 구하지만 평균 값을 통해 +-10 정도
 
-new_samoyed_length = np.random.normal(samoyed_length_mean,10.0,200)
-new_samoyed_height = np.random.normal(samoyed_height_mean,10.0,200)
+new_samoyed_length = np.random.normal(samoyed_length_mean,10.0,200)  # 새로운 200마리의 사모예드 길이 값 구함 랜덤하게 구하지만 평균 값을 통해 +-10 정도
+new_samoyed_height = np.random.normal(samoyed_height_mean,10.0,200)  # 새로운 200마리의 사모예드 높이 값 구함 랜덤하게 구하지만 평균 값을 통해 +-10 정도
 
 new_found_dog_length = np.random.normal((dachhund_length_mean + samoyed_length_mean) / 2, 10.0, size=5)      # 새로운 강아지 랜덤하게 5마리 길이
 new_found_dog_height = np.random.normal((dachhund_height_mean + samoyed_height_mean) / 2, 10.0, size=5)      # 새로운 강아지 랜덤하게 5마리 높이
 
 # KNN 알고리즘 으로 분류
-
 # 닥스훈트의 target 을 0으로 만듦
 dachhund_data = np.column_stack((new_dachhund_length,new_dachhund_height))
 dachhund_label = np.zeros(len(dachhund_data))
@@ -40,7 +38,7 @@ dogs = np.concat((dachhund_data, samoyed_data), axis=0) # 데이터 결합
 labels = np.concat((dachhund_label, samoyed_label), axis=0)
 
 dog_classes = {0 : "닥스훈트",
-               1 : "사모예드"}  # 써주면 좋음 안써도 되는데
+               1 : "사모예드"}  # 안써도 되는데 써주면 알아보기 쉽다
 
 
 k = 3
