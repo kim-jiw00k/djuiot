@@ -7,18 +7,26 @@
 #define BUF_SIZE 1024
 char* get_content_type(const char* path);
 
-int main(int argc,int argv[])
+int main(int argc,char* argv[])
 {
 	int serv_sock, clnt_sock;
 	char buf[BUF_SIZE];
 	struct sockaddr_in serv_adr, clnt_adr;
 	socklen_t clnt_adr_sz;
+	// 에러 처리
+	if(argc != 2)
+	{
+		printf("Usage : %s <port>\n", argv[0]);
+		exit(1);
+	}
 	
 	FILE* fp;
 	char html[BUF_SIZE];
 	size_t read_bytes;
 
 	fp = fopen("index.html","r");
+	
+	// 에러 처리
 	if(fp == NULL)
 	{
 		perror("index.html 파일을 열 수 없습니다.");
@@ -35,7 +43,7 @@ int main(int argc,int argv[])
 	memset(&serv_adr, 0, sizeof(serv_adr));
 	serv_adr.sin_family = AF_INET;
 	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
-	serv_adr.sin_port = htons(atoi(argv[0]));
+	serv_adr.sin_port = htons(atoi(argv[1]));
 
  	if(bind(serv_sock, (struct sockaddr*)&serv_adr, sizeof(serv_adr)) == -1)
 	{
@@ -49,7 +57,7 @@ int main(int argc,int argv[])
 		exit(1);
 	}
 
-	printf("웹서버 실행중... <port> : %d\n", argv[0]);
+	printf("웹서버 실행중... <port> : %d\n", argv[1]);
 
 	while(1)
 	{
@@ -68,11 +76,12 @@ int main(int argc,int argv[])
 			continue;
 		}
 
+		//경로 처리
 		char file_path[100];
 		if(strcmp(path, "/") == 0)
 			strcpy(file_path, "index.html");
 		else
-			strcpy(file_path, path + 1);
+			strcpy(file_path, path + 1); // "/image.png" -> "image.png"
 
 		FILE* fp = fopen(file_path, "rb");
 		if(!fp)
@@ -93,6 +102,7 @@ int main(int argc,int argv[])
 				"Content-Type : %s\r\n\r\n", content_type);
 		write(clnt_sock, header, strlen(header));
 
+		// 파일 내용 전송
 		size_t n;
 		while ((n = fread(buf, 1,BUF_SIZE, fp)) > 0)
 		{
@@ -105,7 +115,7 @@ int main(int argc,int argv[])
 
 	return 0;
 }
-
+// 파일 확장자에 따라 MINE 타입 반환
 char* get_content_type(const char* path)
 {
 	if (strstr(path, ".html")) return "text/html";
