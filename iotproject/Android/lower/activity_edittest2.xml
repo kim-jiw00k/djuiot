@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="com.example.edittext.MainActivity2">
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hello Android"
+        android:textSize="25dp"
+        android:textColor="#010831"
+        tools:ignore="HardcodedText,SpUsage">
+    </TextView>
+    <EditText
+        android:id="@+id/edtv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input Message : "
+        android:textSize="25dp"
+        android:textColor="#0FE9D5"
+        tools:ignore="Autofill,HardcodedText,SpUsage,TextFields">
+    </EditText>
+    <Button
+        android:id="@+id/bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        android:textColor="#FFEB3B"
+        tools:ignore="HardcodedText">
+    </Button>
+
+    <EditText
+        android:id="@+id/edtv2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input Message2 : "
+        android:textSize="25dp"
+        android:textColor="#0FE9D5"
+        tools:ignore="Autofill,HardcodedText,SpUsage,TextFields">
+    </EditText>
+    <Button
+        android:id="@+id/bt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button2"
+        android:textColor="#FFEB3B"
+        tools:ignore="HardcodedText">
+    </Button>
+</LinearLayout>

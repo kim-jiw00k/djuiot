@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".toast">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#F6DD08"
+        android:layout_weight="9"
+        >
+        <!-- 14행은 가중치 적용을 위해 0으로 설정
+         16행은 가중치 적용-->
+        <ImageView
+            android:id="@+id/imageV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/images"
+            tools:ignore="ContentDescription">
+        </ImageView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#D062E2"
+        android:layout_weight="1"
+        android:weightSum="10"
+        >
+        <!-- 30행은 가중치 적용을 위해 0으로 설정
+         32행은 가중치 적용-->
+        <EditText
+            android:id="@+id/eidtT"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="여기에 입력하세요"
+            android:layout_weight="8"
+            android:textSize="20dp"
+            tools:ignore="Autofill,HardcodedText,NestedWeights,SpUsage,TextFields">
+        </EditText>
+        <Button
+            android:id="@+id/bt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="버튼"
+            android:layout_weight="2"
+            android:textSize="20dp"
+            tools:ignore="HardcodedText,SpUsage">
+        </Button>
+    </LinearLayout>
+</LinearLayout>
