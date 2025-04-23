@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main_apllication2"
+    android:fitsSystemWindows="true"
+    >
+    <!-- fitsSystemWindows 는 타이틀바 밑으로 옮기게 하는 것 -->
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign in"
+        android:textSize="25dp"
+        android:textColor="#FF0000"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText,SpUsage">
+    </TextView>
+    <EditText
+        android:id="@+id/et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ID Input :"
+        tools:ignore="Autofill,HardcodedText,LabelFor,MissingConstraints,TextFields">
+    </EditText>
+    <Button
+        android:id="@+id/bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign in"
+        app:layout_constraintTop_toBottomOf="@+id/et"
+        tools:ignore="HardcodedText,MissingConstraints">
+    </Button>
+</androidx.constraintlayout.widget.ConstraintLayout>
