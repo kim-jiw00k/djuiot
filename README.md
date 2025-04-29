@@ -16,3 +16,5 @@ mini_project_3 : CNN을 이용한 필기체 숫자 인식 프로그램 (TensorFl
 mini_project_4 : VGG19를 이용하여 이미지 인식 프로그램 (TensorFlow) (2025.03.27)
 
 project_4 : 파이썬을 이용하여 필기체 인식 후 아두이노 출력 프로그램 (C++,Python,TensorFlow) (2025-03-28 ~ 2025-04-04)
+
+project_5 : 라즈베리파이를 이용한 TCP/IP 스무고개 서버 (C 언어) (2025-04-14 ~ 2025-04-18)
