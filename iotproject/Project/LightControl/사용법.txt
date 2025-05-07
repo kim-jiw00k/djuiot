@@ -1,0 +1,32 @@
+브로커 = 서버를 연 사람
+구독자 = 읽기를 하는 사람
+공급자 = 보내기를 하는 사람
+
+MQTT 사용법 
+
+라즈베리파이 연결 하기 위해 AndroidManifest.xml에 <uses-permission android:name="android.permission.INTERNET" /> 추가 
+메인 자바 코드 쓰고 
+라즈베리파이 내에서 설정 해야함 cd /etc/mosquitto 가서 mosquitto.conf 수정 listener 1883 0.0.0.0 이랑 allow_anonymous true 설정 후 시작 그러면 안드로이드랑 연결 됨
+
+자주 쓰는 용어
+sudo systemctl start mosquitto : 시작
+sudo systemctl status mosquitto : 정보
+mosquitto_sub -h 192.168.0.5 -p 1883 -t LightControl
+-h 호스트 ip -p 포트 -t 토픽이름
+
+import RPi.GPIO as GPIO         #파이썬에서 LED 제어를 위한 참조
+import paho.mqtt.client as mqtt #MQTT 통신을 위한 참조
+client = mqtt.Client()          # 클라이언트 객체 생성 서버와 연결, 메세지 송수신
+client.on_message = on_msg      # 메세지 수신 시 실행할 콜백 함수등록
+
+client.connect(BROKER_IP, BROKER_PORT)  # MQTT 브로커 서버에 연결 192.168.0.5:1883 에 연결
+client.subscribe(TOPIC) # 특정 토픽을 구독 LightControl 에 구독
+
+try:
+    client.loop_forever()   # 메세지를 계속 수신 대기 시킴 이 루프가 있어야 메세지 수신 가능
+except KeyboardInterrupt:       #ctrl+C 를 누르면 꺼짐
+    print("Program End")
+    GPIO.cleanup()          # 사용한 핀을 초기화 다른 프로그램과 충돌 방지
+
+파이썬 실행 방법
+RealVNC Viewer 로 라즈베리파이 열어서 지니 에디터 (기본 에디터)를 써서 열어서 종이비행기 모양 누르면 파이썬 코드 실행
