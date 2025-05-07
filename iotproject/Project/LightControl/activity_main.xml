@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="1in"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="268dp"
+        android:text=" "
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText,InOrMmUsage">
+    </TextView>
+
+    <Button
+        android:id="@+id/btn_on"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="ON"
+        app:layout_constraintBottom_toBottomOf="@id/tv"
+        app:layout_constraintTop_toTopOf="@id/tv"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/tv"
+        tools:ignore="HardcodedText">
+    </Button>
+
+    <Button
+        android:id="@+id/btn_off"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="OFF"
+        app:layout_constraintBottom_toBottomOf="@id/tv"
+        app:layout_constraintTop_toTopOf="@id/tv"
+        app:layout_constraintLeft_toLeftOf="@+id/tv"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="HardcodedText">
+    </Button>
+
+    <TextView
+        android:id="@+id/color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="색상 선택"
+        android:textSize="20dp"
+        android:textColor="#000000"
+        app:layout_constraintTop_toBottomOf="@id/btn_on"
+        app:layout_constraintLeft_toLeftOf="@id/tv"
+        app:layout_constraintRight_toRightOf="@id/tv"
+        tools:ignore="HardcodedText,SpUsage">
+    </TextView>
+
+    <Button
+        android:id="@+id/btn_red"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#ff0000"
+        app:layout_constraintTop_toBottomOf="@id/color"
+        app:layout_constraintLeft_toLeftOf="@id/btn_on"
+        app:layout_constraintRight_toRightOf="@id/btn_on"
+        >
+    </Button>
+
+    <Button
+        android:id="@+id/btn_green"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#1ddb16"
+        app:layout_constraintTop_toBottomOf="@id/color"
+        app:layout_constraintLeft_toLeftOf="@id/btn_red"
+        app:layout_constraintRight_toRightOf="@id/btn_blue"
+        >
+    </Button>
+
+    <Button
+        android:id="@+id/btn_blue"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#0100ff"
+        app:layout_constraintTop_toBottomOf="@id/color"
+        app:layout_constraintLeft_toLeftOf="@id/btn_off"
+        app:layout_constraintRight_toRightOf="@id/btn_off"
+        >
+    </Button>
+
+    <TextView
+        android:id="@+id/lightness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text= "밝기 조절"
+        android:textSize="20dp"
+        android:textColor="#000000"
+        app:layout_constraintTop_toBottomOf="@id/btn_green"
+        app:layout_constraintLeft_toLeftOf="@id/tv"
+        app:layout_constraintRight_toRightOf="@id/tv"
+        tools:ignore="HardcodedText,SpUsage"
+        >
+    </TextView>
+
+    <Button
+        android:id="@+id/lightnessctl25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="25%"
+        android:textColor="#000000"
+        android:backgroundTint="#ffffff"
+        app:layout_constraintTop_toBottomOf="@+id/lightness"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/lightness"
+        tools:ignore="HardcodedText,InOrMmUsage,MissingConstraints"
+        >
+    </Button>
+
+    <Button
+        android:id="@+id/lightnessctl50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="50%"
+        android:textColor="#000000"
+        android:backgroundTint="#ffffff"
+        app:layout_constraintTop_toBottomOf="@+id/lightness"
+        app:layout_constraintLeft_toRightOf="@+id/lightnessctl25"
+        tools:ignore="HardcodedText,InOrMmUsage,MissingConstraints"
+        >
+    </Button>
+
+    <Button
+        android:id="@+id/lightnessctl75"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="75%"
+        android:textColor="#000000"
+        android:backgroundTint="#ffffff"
+        app:layout_constraintTop_toBottomOf="@+id/lightness"
+        app:layout_constraintLeft_toRightOf="@+id/lightnessctl50"
+        tools:ignore="HardcodedText,InOrMmUsage,MissingConstraints"
+        >
+    </Button>
+
+    <Button
+        android:id="@+id/lightnessctl100"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100%"
+        android:textColor="#000000"
+        android:backgroundTint="#ffffff"
+        app:layout_constraintTop_toBottomOf="@+id/lightness"
+        app:layout_constraintLeft_toRightOf="@+id/lightnessctl75"
+        tools:ignore="HardcodedText,InOrMmUsage,MissingConstraints"
+        >
+    </Button>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
