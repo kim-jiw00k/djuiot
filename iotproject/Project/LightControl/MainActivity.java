@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         try {
-            mqttClient = new MqttClient(ServerIP, MqttClient.generateClientId(), null); // 3번 연결설정
+            mqttClient = new MqttClient(ServerIP, MqttClient.generateClientId(), null); // 연결설정
             mqttClient.connect();
 
             if (mqttClient.isConnected()){
@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-            mqttClient.subscribe(TOPIC); // 5번 구독 설정
-            mqttClient.setCallback(new MqttCallback() { // 6번 콜백 설정
+            mqttClient.subscribe(TOPIC); // 구독 설정
+            mqttClient.setCallback(new MqttCallback() { // 콜백 설정
                 @Override
                 public void connectionLost(Throwable cause) {
                     Log.d("MQTT", "연결 실패");
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
-                    Log.d("MQTT", "메세지 도착 : " + message.toString()); // 7번 메세지 도착
+                    Log.d("MQTT", "메세지 도착 : " + message.toString()); // 메세지 도착
                 }
 
                 @Override
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("MQTT", "전송");
                 try {
-                    mqttClient.publish(TOPIC, new MqttMessage("ON".getBytes())); // 4번 메세지 전송
+                    mqttClient.publish(TOPIC, new MqttMessage("ON".getBytes())); // 메세지 전송
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("MQTT", "전송");
                 try {
-                    mqttClient.publish(TOPIC, new MqttMessage("OFF".getBytes())); // 4번 메세지 전송
+                    mqttClient.publish(TOPIC, new MqttMessage("OFF".getBytes())); // 메세지 전송
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    mqttClient.publish(TOPIC, new MqttMessage("R".getBytes())); // 4번 메세지 전송
+                    mqttClient.publish(TOPIC, new MqttMessage("R".getBytes())); // 메세지 전송
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    mqttClient.publish(TOPIC, new MqttMessage("G".getBytes())); // 4번 메세지 전송
+                    mqttClient.publish(TOPIC, new MqttMessage("G".getBytes())); // 메세지 전송
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    mqttClient.publish(TOPIC, new MqttMessage("B".getBytes())); // 4번 메세지 전송
+                    mqttClient.publish(TOPIC, new MqttMessage("B".getBytes())); // 메세지 전송
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    mqttClient.publish(TOPIC, new MqttMessage("BRIGHTNESS:25".getBytes())); // 4번 메세지 전송
+                    mqttClient.publish(TOPIC, new MqttMessage("BRIGHTNESS:25".getBytes())); // 메세지 전송
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    mqttClient.publish(TOPIC, new MqttMessage("BRIGHTNESS:50".getBytes())); // 4번 메세지 전송
+                    mqttClient.publish(TOPIC, new MqttMessage("BRIGHTNESS:50".getBytes())); // 메세지 전송
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    mqttClient.publish(TOPIC, new MqttMessage("BRIGHTNESS:75".getBytes())); // 4번 메세지 전송
+                    mqttClient.publish(TOPIC, new MqttMessage("BRIGHTNESS:75".getBytes())); // 메세지 전송
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    mqttClient.publish(TOPIC, new MqttMessage("BRIGHTNESS:100".getBytes())); // 4번 메세지 전송
+                    mqttClient.publish(TOPIC, new MqttMessage("BRIGHTNESS:100".getBytes())); // 메세지 전송
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
